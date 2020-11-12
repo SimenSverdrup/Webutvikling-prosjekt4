@@ -1,0 +1,12 @@
+{
+  "name": "prosjekt-4",
+  "displayName": "prosjekt-4",
+  "expo": {
+    "name": "prosjekt-4",
+    "slug": "prosjekt-4",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
