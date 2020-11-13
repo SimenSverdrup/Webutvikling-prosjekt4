@@ -21,6 +21,8 @@ class Store {
 
     @observable page = 0;
 
+    @observable modalVisible = false;
+
 
     // Actions:
     @action updateSearch = (search: string) => {
@@ -31,6 +33,7 @@ class Store {
     @action updateSelect = (selection: string) => {
         this.select_id = selection;
         console.log("Selection updated to: " + this.select_id);
+        this.updateModalVisible(true);
     }
 
     @action updateGenre = (genre: string) => {
@@ -46,6 +49,11 @@ class Store {
     @action updatePage = (page: number) => {
         this.page = page;
         console.log("Sort updated to: " + this.page.toString());
+    }
+
+    @action updateModalVisible = (modalVisible: boolean) => {
+        this.modalVisible = modalVisible;
+        console.log("Modal updated to: " + modalVisible.toString());
     }
 }
 
