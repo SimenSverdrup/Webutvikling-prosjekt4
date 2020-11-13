@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import MovieBox from './MovieBox';
 import { observer } from 'mobx-react';
 import Store from '../mobx/store';
@@ -14,6 +14,13 @@ const MovieList = () => {
     const store = useContext(Store);
     const { search_string, genre, sort, page, modalVisible } = store;
 
+    const movieChange = useCallback((json) => {
+        setMovies(json);
+    }, []);
+
+    const genreChange = useCallback(() => {
+        setGenre(genre);
+    }, []);
 
     useEffect( () => {
         if (genre !== "*") {
@@ -25,8 +32,8 @@ const MovieList = () => {
                 })
                 .then(res => res.json())
                 .then(json => {
-                    setMovies(json);
-                    setGenre(genre);
+                    movieChange(json);
+                    genreChange();
                 })
                 .catch(error => {
                     console.log('Could not get movies from DB');
@@ -41,7 +48,7 @@ const MovieList = () => {
                     })
                     .then(res => res.json())
                     .then(json => {
-                        setMovies(json);
+                        movieChange(json);
                     })
                     .catch(error => {
                         console.log('Could not get movies from DB');
@@ -55,18 +62,19 @@ const MovieList = () => {
                     })
                     .then(res => res.json())
                     .then(json => {
-                        setMovies(json);
+                        movieChange(json);
                     })
                     .catch(error => {
                         console.log('Could not get movies from DB');
                     });
             }
         }
+        return function cleanup() {}
     }, [search_string, movies, genre, sort, page]);
 
 
     return(
-        <View>
+        <ScrollView>
             <ScrollView pagingEnabled={true}>
                 {movies.map(movie =>
                     <ListItem key={movie["_id"]}>
@@ -89,7 +97,7 @@ const MovieList = () => {
                     <MovieInfo/>
                 </Modal>
             </View>
-        </View>
+        </ScrollView>
     )
 }
 
