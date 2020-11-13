@@ -15,10 +15,13 @@ interface Props {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 5,
-        paddingBottom: 5,
+        paddingTop: 1,
         paddingLeft: 3,
         paddingRight: 3,
+        borderRadius: 5,
+        borderWidth: 0.5,
+        borderColor: '#000',
+        width: 300,
     },
     image: {
         width: 70,
@@ -47,7 +50,9 @@ const MovieBox = (props: Props) => {
     }
 
     return (
-        <View style={styles.container} onTouchEnd={() => updateSelect(props.id)}>
+        <View style={styles.container} onTouchEnd={() => {
+            updateSelect(props.id);
+        }}>
             <Image source={{uri: props.imgUrl}} resizeMethod={'auto'} style={styles.image}/>
             <View>
                 <Text style={styles.header}>{props.title}</Text>

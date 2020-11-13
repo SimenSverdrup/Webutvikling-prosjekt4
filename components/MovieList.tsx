@@ -2,8 +2,9 @@ import React, {useContext, useEffect, useState} from 'react';
 import MovieBox from './MovieBox';
 import { observer } from 'mobx-react';
 import Store from '../mobx/store';
-import {ScrollView, View} from "react-native";
+import {Modal, ScrollView, StyleSheet, View} from "react-native";
 import {ListItem} from "react-native-elements";
+import MovieInfo from "./MovieInfo";
 
 
 const MovieList = () => {
@@ -11,7 +12,7 @@ const MovieList = () => {
     const [movies, setMovies] = useState([]);
     const [genreChoice, setGenre] = useState("");
     const store = useContext(Store);
-    const { search_string, genre, sort, page } = store;
+    const { search_string, genre, sort, page, modalVisible } = store;
 
 
     useEffect( () => {
@@ -65,22 +66,40 @@ const MovieList = () => {
 
 
     return(
-        <ScrollView pagingEnabled={true}>
-            { movies.map( movie =>
-                <ListItem key={movie["_id"]}>
-                    <MovieBox id={movie["_id"]}
-                              title={movie["title"]}
-                              duration={movie["duration"]}
-                              genres={movie["genres"]}
-                              imgUrl={movie["posterurl"]}
-                              year={movie["year"]}
-                              imdbRating={movie["imdbRating"]}
-                    />
-                </ListItem>
-            )}
-        </ScrollView>
+        <View>
+            <ScrollView pagingEnabled={true}>
+                {movies.map(movie =>
+                    <ListItem key={movie["_id"]}>
+                        <MovieBox id={movie["_id"]}
+                                  title={movie["title"]}
+                                  duration={movie["duration"]}
+                                  genres={movie["genres"]}
+                                  imgUrl={movie["posterurl"]}
+                                  year={movie["year"]}
+                                  imdbRating={movie["imdbRating"]}
+                        />
+                    </ListItem>
+                )}
+            </ScrollView>
+            <View style={styles.centeredView}>
+                <Modal
+                    animationType="slide"
+                    transparent={false}
+                    visible={modalVisible}>
+                    <MovieInfo/>
+                </Modal>
+            </View>
+        </View>
     )
 }
 
+const styles = StyleSheet.create({
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 30
+    },
+});
 
 export default observer(MovieList);
