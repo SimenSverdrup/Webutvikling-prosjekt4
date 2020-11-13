@@ -28,6 +28,7 @@ class Store {
     @action updateSearch = (search: string) => {
         this.search_string = search;
         console.log("Search updated to: " + this.search_string);
+        this.updatePage(0);
     }
 
     @action updateSelect = (selection: string) => {
