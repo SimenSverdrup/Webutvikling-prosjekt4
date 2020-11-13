@@ -53,7 +53,8 @@ const MovieBox = (props: Props) => {
         <View style={styles.container} onTouchEnd={() => {
             updateSelect(props.id);
         }}>
-            <Image source={{uri: props.imgUrl}} resizeMethod={'auto'} style={styles.image}/>
+            <Image source={{uri: props.imgUrl ? props.imgUrl : "https://previews.123rf.com/images/latkun/latkun1712/latkun171200130/92172856-empty-transparent-background-seamless-pattern.jpg"}}
+                   resizeMethod={'auto'} style={styles.image}/>
             <View>
                 <Text style={styles.header}>{props.title}</Text>
                 <Text style={styles.text}>Duration: {duration}</Text>

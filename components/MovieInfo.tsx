@@ -35,6 +35,17 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 18
     },
+    ratingWrapper: {
+        alignContent: "center",
+        paddingTop: 5
+    },
+    rating: {
+        fontSize: 18,
+        fontWeight: "bold",
+        textAlign: "center",
+        paddingTop: 10,
+        paddingBottom: 50
+    },
     header: {
         fontSize: 25,
         fontWeight: "bold"
@@ -82,22 +93,23 @@ const MovieInfo = () => {
     duration += " min";
 
     return (
-        <View onTouchEnd={() => {
-            updateModalVisible(false)}}
-            style={styles.container}
-        >
+        <View style={styles.container}>
             <Text style={styles.header}>{movie["title"]}</Text>
-            <Image source={{uri: movie["posterurl"]}} resizeMethod={'auto'} style={styles.image}/>
-            <View>
+            <Image source={{uri: movie["posterurl"] ? movie["posterurl"] : "https://previews.123rf.com/images/latkun/latkun1712/latkun171200130/92172856-empty-transparent-background-seamless-pattern.jpg"}}
+                   resizeMethod={'auto'} style={styles.image}/>
+            <View style={{paddingBottom: 3}}>
                 <Text style={styles.text}>Year: {movie["year"]}</Text>
                 <Text style={styles.text}>Duration: {duration}</Text>
                 <Text style={styles.text}>Genres: {movie["genres"].join(', ')}</Text>
                 <Text style={styles.text}>Main actors: {movie["actors"].join(', ')}</Text>
                 <Text style={styles.text}>IMDB rating: {movie["imdbRating"]? movie["imdbRating"] + "/10" : "Unknown" }</Text>
-                <Text style={styles.text}>Storyline: {movie["storyline"].length > 341 ? movie["storyline"].substring(0, 340) : movie["storyline"] }</Text>
-                <TextInput placeholder="1-10" onChange={text => setUserRating(text.toString())} value={userRating}>Rate this movie:</TextInput>
-                <Button title={"Submit"} onPress={() => updateUserRating()}/>
-                <Text style={styles.text}>Your rating: {movie["userRating"] ? movie["userRating"] : "None yet"}</Text>
+                <Text style={styles.text}>Storyline: {movie["storyline"].length > 151 ? movie["storyline"].substring(0, 150) : movie["storyline"] }</Text>
+            </View>
+            <View style={styles.ratingWrapper}>
+                <TextInput placeholder="Your rating 1-10" onChangeText={score => setUserRating(score)}/>
+                <Button title={"Submit"} onPress={() => updateUserRating()} />
+                <Text style={styles.rating}>Your rating: {movie["userRating"] ? movie["userRating"] : "None yet"}</Text>
+                <Button title={"Close"} onPress={() => updateModalVisible(false)} color={"#9c9c9c"}/>
             </View>
         </View>
     )
