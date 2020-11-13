@@ -6,10 +6,10 @@ import Title from "./components/Title";
 
 export default function App() {
   return (
-    <View style={styles.header}>
-      <Title/>
-      <SearchBar/>
-    </View>
+        <View style={styles.header}>
+          <Title/>
+          <SearchBar/>
+        </View>
   );
 }
 
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   header: {
-    color: '#f4511e',
-    fontWeight: 'bold',
+    backgroundColor: '#759ee0',
+    marginTop: 23,
   }
 });
