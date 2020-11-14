@@ -19,20 +19,32 @@ const styles = StyleSheet.create({
         paddingLeft: 3,
         paddingRight: 3,
         borderRadius: 5,
-        borderWidth: 0.5,
-        borderColor: '#000',
+        backgroundColor: '#EEEEEE',
         width: 300,
+        height: 150,
+        flex: 1,
+        flexDirection: 'row'
     },
     image: {
-        width: 70,
-        height: 110,
+        width: 100,
+        height: 140,
     },
     text: {
-        fontSize: 15
+        fontSize: 15,
+        left: 20,
+        top: 20
     },
     header: {
         fontSize: 18,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        left: 20,
+        bottom: 5,
+        top: 5
+    },
+    flexbox: {
+        flex: 1,
+        flexDirection: 'column',
+        width: 1
     }
 });
 
@@ -55,7 +67,7 @@ const MovieBox = (props: Props) => {
         }}>
             <Image source={{uri: props.imgUrl ? props.imgUrl : "https://previews.123rf.com/images/latkun/latkun1712/latkun171200130/92172856-empty-transparent-background-seamless-pattern.jpg"}}
                    resizeMethod={'auto'} style={styles.image}/>
-            <View>
+            <View style={styles.flexbox}>
                 <Text style={styles.header}>{props.title}</Text>
                 <Text style={styles.text}>Duration: {duration}</Text>
                 <Text style={styles.text}>Genre: {props.genres.join(', ')}</Text>
