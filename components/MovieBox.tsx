@@ -15,39 +15,34 @@ interface Props {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 1,
-        paddingLeft: 3,
-        paddingRight: 3,
+        marginTop: 1,
+        marginLeft: 3,
+        marginRight: 3,
         borderRadius: 5,
         backgroundColor: '#EEEEEE',
         width: 300,
-        height: 150,
+        height: 180,
         flex: 1,
         flexDirection: 'row',
         minWidth: 0,
     },
     image: {
-        width: 100,
-        height: 140,
+        width: 110,
+        height: 170,
+        margin: 5,
     },
     text: {
         fontSize: 15,
-        left: 20,
-        top: 20,
-        //
-        //whiteSpace: nowrap,
-        //order: 1,
-        //flex: 0 1 auto,
-        //textOverflow: ellipsis,
-        //overflow: hidden,
+        marginLeft: 15,
+        marginTop: 9,
         minWidth: 0,
     },
     header: {
         fontSize: 18,
         fontWeight: "bold",
-        left: 20,
-        bottom: 5,
-        top: 5
+        marginLeft: 15,
+        marginBottom: 5,
+        marginTop: 7,
     },
     flexbox: {
         flex: 1,

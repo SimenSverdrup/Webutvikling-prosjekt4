@@ -44,15 +44,11 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "column",
         marginTop: 20,
-        marginBottom: 50,
-        //paddingTop: 10,
-        //height: 1000,
+        //marginBottom: 50,
     },
     image: {
         width: 230,
         height: 340,
-        //width: 380,
-        //height: 600,
         marginBottom: 20,
         marginTop: 10,
     },
@@ -68,7 +64,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         textAlign: "center",
         marginTop: 10,
-        marginBottom: 30
+        //marginBottom: 30
     },
     header: {
         fontSize: 25,
@@ -76,7 +72,6 @@ const styles = StyleSheet.create({
         marginBottom: 15,
     },
     input: {
-        borderColor: 'black', // skjer ikke
         borderStyle: "solid",
         borderRadius:  5,
         backgroundColor: "#ebebeb",
