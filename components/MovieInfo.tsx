@@ -1,7 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { observer } from "mobx-react"
 import Store from '../mobx/store'
-import {Button, Image, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
+import {Button, Image, ScrollView, StyleSheet, Text, TextInput, View, TouchableOpacity} from "react-native";
+/*import {Icon} from 'native-base';*/
 
 
 const initialMovie = {
@@ -138,6 +139,7 @@ const MovieInfo = () => {
 
     return (
         <ScrollView style={styles.scrollContainer}>
+            {/*<Icon name='home' />*/}
             <View style={styles.container}>
                 <Image source={{uri: movie["posterurl"] ? movie["posterurl"] : "https://previews.123rf.com/images/latkun/latkun1712/latkun171200130/92172856-empty-transparent-background-seamless-pattern.jpg"}}
                     resizeMethod={'auto'} style={styles.image}/>

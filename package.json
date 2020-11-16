@@ -9,10 +9,12 @@
   },
   "dependencies": {
     "expo": "~39.0.2",
+    "expo-font": "~8.3.0",
     "expo-splash-screen": "~0.6.2",
     "expo-updates": "~0.3.3",
     "mobx": "^6.0.3",
     "mobx-react": "^7.0.5",
+    "native-base": "^2.13.14",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "~0.63.3",
