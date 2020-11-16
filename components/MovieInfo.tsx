@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import { observer } from "mobx-react"
 import Store from '../mobx/store'
 import {Button, Image, ScrollView, StyleSheet, Text, TextInput, View, TouchableOpacity} from "react-native";
@@ -98,38 +98,58 @@ const styles = StyleSheet.create({
 
 const MovieInfo = () => {
     const store = useContext(Store);
-    const { select_id, updateModalVisible } = store;
+    const { select_id, updateModalVisible, modalVisible } = store;
     const [id, setId] = useState(select_id);
     const [movie, setMovie] = useState(initialMovie);
     const [userRating, setUserRating] = useState("");
 
     let duration = "Unknown";
+    const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
 
     const updateUserRating = () => {
-        if (!Number.isInteger(parseInt(userRating))) {
-            // not a number
-            console.log("Not a number");
-            return;
-        }
-        fetch("http://it2810-19.idi.ntnu.no:3000/api/user/" + id + '/' + userRating.toString(), {
-            method: 'PUT'
-        })
-            .catch( error => {
-                console.log('Could not update selected movie in DB');
-            });
-        
+        (async function() {
+            setIsError(false);
+            setIsLoading(true);
+            if (!Number.isInteger(parseInt(userRating))) {
+                // not a number
+                console.log("Not a number");
+                return;
+            }
+            await fetch("http://it2810-19.idi.ntnu.no:3000/api/user/" + id + '/' + userRating.toString(), {
+                method: 'PUT'
+            })
+                .catch( error => {
+                    console.log('Could not update selected movie in DB');
+                    setIsError(true);
+                });
+            setIsLoading(false);
+        })();
     }
 
+    const movieChange = useCallback((json) => {
+        setMovie(json);
+    }, []);
+
     useEffect( () => {
-        setId(select_id);
-        fetch("http://it2810-19.idi.ntnu.no:3000/api/id/" + id)
-            .then( res => res.json())
-            .then( mov => {
-                setMovie(mov);
-            })
-            .catch( error => {
-                console.log('Could not get selected movie from DB');
-            });
+        (async function() {
+            setIsError(false);
+            setIsLoading(true);
+            setId(select_id);
+            if (!modalVisible) {
+                return;
+            }
+            await fetch("http://it2810-19.idi.ntnu.no:3000/api/id/" + id)
+                .then( res => res.json())
+                .then( mov => {
+                    movieChange(mov);
+                })
+                .catch( error => {
+                    console.log('Could not get selected movie from DB');
+                    setIsError(true);
+                });
+            setIsLoading(false);
+        })();
     }, [movie, select_id]);
 
     duration = movie["duration"]

@@ -3,11 +3,11 @@ import {Modal, StyleSheet, View} from 'react-native';
 import SearchBar from "./components/SearchBar";
 import Title from "./components/Title";
 import MovieList from "./components/MovieList";
-import {observer} from "mobx-react";
+import { observer } from "mobx-react";
+import Paginater from "./components/Paginater";
 /*import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import { AppLoading } from 'expo';*/
-
 
 const App = () => {
 
@@ -29,15 +29,14 @@ const App = () => {
 
     return (
       <View>
+
         <View style={styles.header}>
           <Title/>
           <SearchBar/>
         </View>
-
         <View style={styles.container}>
             <MovieList/>
         </View>
-
       </View>
   );
 };
