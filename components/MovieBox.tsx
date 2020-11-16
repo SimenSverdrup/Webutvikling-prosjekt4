@@ -15,24 +15,39 @@ interface Props {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 1,
-        paddingLeft: 3,
-        paddingRight: 3,
+        marginTop: 1,
+        marginLeft: 3,
+        marginRight: 3,
         borderRadius: 5,
-        borderWidth: 0.5,
-        borderColor: '#000',
+        backgroundColor: '#EEEEEE',
         width: 300,
+        height: 180,
+        flex: 1,
+        flexDirection: 'row',
+        minWidth: 0,
     },
     image: {
-        width: 70,
-        height: 110,
+        width: 110,
+        height: 170,
+        margin: 5,
     },
     text: {
-        fontSize: 15
+        fontSize: 15,
+        marginLeft: 15,
+        marginTop: 9,
+        minWidth: 0,
     },
     header: {
         fontSize: 18,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        marginLeft: 15,
+        marginBottom: 5,
+        marginTop: 7,
+    },
+    flexbox: {
+        flex: 1,
+        flexDirection: 'column',
+        width: 1
     }
 });
 
@@ -55,7 +70,7 @@ const MovieBox = (props: Props) => {
         }}>
             <Image source={{uri: props.imgUrl ? props.imgUrl : "https://previews.123rf.com/images/latkun/latkun1712/latkun171200130/92172856-empty-transparent-background-seamless-pattern.jpg"}}
                    resizeMethod={'auto'} style={styles.image}/>
-            <View>
+            <View style={styles.flexbox}>
                 <Text style={styles.header}>{props.title}</Text>
                 <Text style={styles.text}>Duration: {duration}</Text>
                 <Text style={styles.text}>Genre: {props.genres.join(', ')}</Text>

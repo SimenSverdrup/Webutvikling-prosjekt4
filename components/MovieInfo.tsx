@@ -1,7 +1,8 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react';
 import { observer } from "mobx-react"
 import Store from '../mobx/store'
-import {Button, Image, StyleSheet, Text, TextInput, View} from "react-native";
+import {Button, Image, ScrollView, StyleSheet, Text, TextInput, View, TouchableOpacity} from "react-native";
+/*import {Icon} from 'native-base';*/
 
 
 const initialMovie = {
@@ -19,36 +20,79 @@ const initialMovie = {
 
 const styles = StyleSheet.create({
     container: {
-        paddingTop: 3,
+        backgroundColor: 'white',
+        /*paddingTop: 3,
         paddingLeft: 3,
         paddingRight: 3,
-        borderRadius: 5,
-        borderWidth: 0.5,
-        borderColor: '#000',
         width: 360,
-        height: 700
+        height: 700,*/
+        //borderRadius: 9,
+        //flex: 1,
+        //flexDirection: "column",
+        justifyContent: 'center',
+        alignItems: 'center',
+        //marginRight: 20,
+        //marginLeft: 20,
+        //marginTop: 30,
+        //marginBottom: 20,
+        //top: 50,
+        //width: 350,
+        //overflow: "scroll",
+        //position: "relative",
+    },
+    scrollContainer: {
+        backgroundColor: 'white',
+        flex: 1,
+        flexDirection: "column",
+        marginTop: 20,
+        //marginBottom: 50,
     },
     image: {
-        width: 110,
-        height: 180,
+        width: 230,
+        height: 340,
+        marginBottom: 20,
+        marginTop: 10,
     },
     text: {
-        fontSize: 18
+        lineHeight: 25,
     },
     ratingWrapper: {
-        alignContent: "center",
-        paddingTop: 5
+        //alignContent: "center",
+        //paddingTop: 5
     },
     rating: {
         fontSize: 18,
         fontWeight: "bold",
         textAlign: "center",
-        paddingTop: 10,
-        paddingBottom: 50
+        marginTop: 10,
+        //marginBottom: 30
     },
     header: {
         fontSize: 25,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        marginBottom: 15,
+    },
+    input: {
+        borderStyle: "solid",
+        borderRadius:  5,
+        backgroundColor: "#ebebeb",
+        marginTop: 20,
+        paddingTop: 5,
+        paddingBottom: 5,
+        paddingLeft: 10,
+        paddingRight: 10,
+        fontSize: 18,
+    },
+    textarea: {
+        fontSize: 18,
+        left: 20,
+        right: 20,
+        marginRight: 30,
+        marginTop: 20,
+        width: 320,
+        backgroundColor: "#dcd3de",
+        borderRadius: 8,
+        padding: 15,
     }
 });
 
@@ -114,25 +158,28 @@ const MovieInfo = () => {
     duration += " min";
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.header}>{movie["title"]}</Text>
-            <Image source={{uri: movie["posterurl"] ? movie["posterurl"] : "https://previews.123rf.com/images/latkun/latkun1712/latkun171200130/92172856-empty-transparent-background-seamless-pattern.jpg"}}
-                   resizeMethod={'auto'} style={styles.image}/>
-            <View style={{paddingBottom: 3}}>
-                <Text style={styles.text}>Year: {movie["year"]}</Text>
-                <Text style={styles.text}>Duration: {duration}</Text>
-                <Text style={styles.text}>Genres: {movie["genres"].join(', ')}</Text>
-                <Text style={styles.text}>Main actors: {movie["actors"].join(', ')}</Text>
-                <Text style={styles.text}>IMDB rating: {movie["imdbRating"]? movie["imdbRating"] + "/10" : "Unknown" }</Text>
-                <Text style={styles.text}>Storyline: {movie["storyline"].length > 151 ? movie["storyline"].substring(0, 150) : movie["storyline"] }</Text>
+        <ScrollView style={styles.scrollContainer}>
+            {/*<Icon name='home' />*/}
+            <View style={styles.container}>
+                <Image source={{uri: movie["posterurl"] ? movie["posterurl"] : "https://previews.123rf.com/images/latkun/latkun1712/latkun171200130/92172856-empty-transparent-background-seamless-pattern.jpg"}}
+                    resizeMethod={'auto'} style={styles.image}/>
+                <View style={styles.textarea}>
+                    <Text style={styles.header}>{movie["title"]}</Text>
+                    <Text style={styles.text}>Year: {movie["year"]}</Text>
+                    <Text style={styles.text}>Duration: {duration}</Text>
+                    <Text style={styles.text}>Genres: {movie["genres"].join(', ')}</Text>
+                    <Text style={styles.text}>Main actors: {movie["actors"].join(', ')}</Text>
+                    <Text style={styles.text}>IMDB rating: {movie["imdbRating"]? movie["imdbRating"] + "/10" : "Unknown" }</Text>
+                    <Text style={styles.text}>Storyline: {movie["storyline"].length > 151 ? movie["storyline"].substring(0, 150) : movie["storyline"] }</Text>
+                </View>
+                <View style={styles.ratingWrapper}>
+                    <TextInput style={styles.input} placeholder="Your rating 1-10" onChangeText={score => setUserRating(score)}/>
+                    <Button title={"Submit"} onPress={() => updateUserRating()} />
+                    <Text style={styles.rating}>Your rating: {movie["userRating"] ? movie["userRating"] : "None yet"}</Text>
+                    <Button title={"Close"} onPress={() => updateModalVisible(false)} color={"#9c9c9c"}/>
+                </View>
             </View>
-            <View style={styles.ratingWrapper}>
-                <TextInput placeholder="Your rating 1-10" onChangeText={score => setUserRating(score)}/>
-                <Button title={"Submit"} onPress={() => updateUserRating()} />
-                <Text style={styles.rating}>Your rating: {movie["userRating"] ? movie["userRating"] : "None yet"}</Text>
-                <Button title={"Close"} onPress={() => updateModalVisible(false)} color={"#9c9c9c"}/>
-            </View>
-        </View>
+        </ScrollView>
     )
 }
 
