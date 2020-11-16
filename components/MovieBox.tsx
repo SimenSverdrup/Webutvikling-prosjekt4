@@ -23,7 +23,8 @@ const styles = StyleSheet.create({
         width: 300,
         height: 150,
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        minWidth: 0,
     },
     image: {
         width: 100,
@@ -32,7 +33,14 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 15,
         left: 20,
-        top: 20
+        top: 20,
+        //
+        //whiteSpace: nowrap,
+        //order: 1,
+        //flex: 0 1 auto,
+        //textOverflow: ellipsis,
+        //overflow: hidden,
+        minWidth: 0,
     },
     header: {
         fontSize: 18,
