@@ -49,7 +49,7 @@ class Store {
 
     @action updatePage = (page: number) => {
         this.page = page;
-        console.log("Sort updated to: " + this.page.toString());
+        console.log("Page updated to: " + this.page.toString());
     }
 
     @action updateModalVisible = (modalVisible: boolean) => {

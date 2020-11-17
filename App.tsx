@@ -4,7 +4,6 @@ import SearchBar from "./components/SearchBar";
 import Title from "./components/Title";
 import MovieList from "./components/MovieList";
 import { observer } from "mobx-react";
-import Paginater from "./components/Paginater";
 
 const App = () => {
     return (
