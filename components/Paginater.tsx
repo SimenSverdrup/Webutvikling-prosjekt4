@@ -46,7 +46,6 @@ const Paginater = () => {
             if (genre !== "*") {
                 // genre is set
                 let temp_search_string = search_string === "" ? "*" : search_string;
-                console.log("update genre")
                 await fetch("http://it2810-19.idi.ntnu.no:3000/api/movies/genre/" + temp_search_string + '/' + genre + '/*/0/120',
                     {
                         method: 'GET'

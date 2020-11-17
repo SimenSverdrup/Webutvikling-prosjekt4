@@ -1,7 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
 import Store from '../mobx/store';
-//import MenuListComposition1 from "./DropdownSort";
-//import LongMenu from "./dropdownFilterSlider";
 import { View } from 'react-native';
 import { observer } from 'mobx-react';
 import { SearchBar as SB } from 'react-native-elements';
@@ -34,14 +32,6 @@ const SearchBar = () => {
                 placeholder="Search for movie titles..."
                 value={search}
             />
-            {/*
-            <View>
-                <MenuListComposition1/>
-            </View>
-            <View>
-                <LongMenu/>
-            </View>
-            */}
         </View>
     )
 }
