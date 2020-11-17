@@ -97,6 +97,7 @@ const MovieList = () => {
                         />
                     </ListItem>
                 )}
+                <View style={{height:250}} />
             </ScrollView>
             <View style={styles.centeredView}>
                 <Modal

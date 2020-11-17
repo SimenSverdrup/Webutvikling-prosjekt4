@@ -17,6 +17,7 @@ const App = () => {
         <View style={styles.container}>
             <MovieList/>
         </View>
+
       </View>
   );
 };
