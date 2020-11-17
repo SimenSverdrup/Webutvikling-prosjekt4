@@ -2,7 +2,7 @@ import React, {useCallback, useContext, useEffect, useState} from 'react';
 import { observer } from "mobx-react"
 import Store from '../mobx/store'
 import {Button, Image, ScrollView, StyleSheet, Text, TextInput, View, TouchableOpacity} from "react-native";
-/*import {Icon} from 'native-base';*/
+import {Icon} from 'native-base';
 
 
 const initialMovie = {
@@ -21,51 +21,28 @@ const initialMovie = {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: 'white',
-        /*paddingTop: 3,
-        paddingLeft: 3,
-        paddingRight: 3,
-        width: 360,
-        height: 700,*/
-        //borderRadius: 9,
-        //flex: 1,
-        //flexDirection: "column",
         justifyContent: 'center',
         alignItems: 'center',
-        //marginRight: 20,
-        //marginLeft: 20,
-        //marginTop: 30,
-        //marginBottom: 20,
-        //top: 50,
-        //width: 350,
-        //overflow: "scroll",
-        //position: "relative",
     },
     scrollContainer: {
         backgroundColor: 'white',
         flex: 1,
         flexDirection: "column",
         marginTop: 20,
-        //marginBottom: 50,
     },
     image: {
         width: 230,
         height: 340,
-        marginBottom: 20,
-        marginTop: 10,
     },
     text: {
         lineHeight: 25,
-    },
-    ratingWrapper: {
-        //alignContent: "center",
-        //paddingTop: 5
     },
     rating: {
         fontSize: 18,
         fontWeight: "bold",
         textAlign: "center",
         marginTop: 10,
-        //marginBottom: 30
+        marginBottom: 50
     },
     header: {
         fontSize: 25,
@@ -93,6 +70,11 @@ const styles = StyleSheet.create({
         backgroundColor: "#dcd3de",
         borderRadius: 8,
         padding: 15,
+    },
+    icon: {
+        padding: 0,
+        marginLeft: 20,
+        marginTop: 5,
     }
 });
 
@@ -159,7 +141,7 @@ const MovieInfo = () => {
 
     return (
         <ScrollView style={styles.scrollContainer}>
-            {/*<Icon name='home' />*/}
+            <Icon name='close' style={styles.icon} onPress={() => updateModalVisible(false)} />
             <View style={styles.container}>
                 <Image source={{uri: movie["posterurl"] ? movie["posterurl"] : "https://previews.123rf.com/images/latkun/latkun1712/latkun171200130/92172856-empty-transparent-background-seamless-pattern.jpg"}}
                     resizeMethod={'auto'} style={styles.image}/>
@@ -172,11 +154,10 @@ const MovieInfo = () => {
                     <Text style={styles.text}>IMDB rating: {movie["imdbRating"]? movie["imdbRating"] + "/10" : "Unknown" }</Text>
                     <Text style={styles.text}>Storyline: {movie["storyline"].length > 151 ? movie["storyline"].substring(0, 150) : movie["storyline"] }</Text>
                 </View>
-                <View style={styles.ratingWrapper}>
+                <View>
                     <TextInput style={styles.input} placeholder="Your rating 1-10" onChangeText={score => setUserRating(score)}/>
                     <Button title={"Submit"} onPress={() => updateUserRating()} />
                     <Text style={styles.rating}>Your rating: {movie["userRating"] ? movie["userRating"] : "None yet"}</Text>
-                    <Button title={"Close"} onPress={() => updateModalVisible(false)} color={"#9c9c9c"}/>
                 </View>
             </View>
         </ScrollView>
