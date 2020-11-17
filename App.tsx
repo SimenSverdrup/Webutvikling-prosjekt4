@@ -1,19 +1,34 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import {Modal, StyleSheet, View} from 'react-native';
+import SearchBar from "./components/SearchBar";
+import Title from "./components/Title";
+import MovieList from "./components/MovieList";
+import { observer } from "mobx-react";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+const App = () => {
+    return (
+      <View>
+
+        <View style={styles.header}>
+          <Title/>
+          <SearchBar/>
+        </View>
+        <View style={styles.container}>
+            <MovieList/>
+        </View>
+
+      </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  },
+  header: {
+    backgroundColor: '#a998b3',
+    marginTop: 23,
   },
 });
+
+export default observer(App);
